@@ -49,6 +49,38 @@ This project implements an intelligent route-finding algorithm using **A* Search
 
 ---
 
+## Dataset Description
+
+### **city-gps.txt**
+This file contains GPS data for cities in North America (mostly U.S. cities). Each line in the file corresponds to one city and includes three fields:
+- **City Name**: The name of the city.
+- **Latitude**: The latitude of the city.
+- **Longitude**: The longitude of the city.
+
+Example:
+Chicago 41.8781 -87.6298 LosAngeles 34.0522 -118.2437 ...
+
+
+### **road-segments.txt**
+This file defines road segments that connect pairs of cities. Each line contains:
+- **First City**: The starting city of the road segment.
+- **Second City**: The destination city of the road segment.
+- **Length (in miles)**: The length of the road segment.
+- **Speed Limit (in miles per hour)**: The speed limit on the road segment.
+- **Highway Name**: The name of the highway on the road segment.
+
+Example:
+Chicago LosAngeles 2000 60 I-80 LosAngeles NewYork 2500 65 I-10 ...
+
+
+### **Handling Data Issues**
+There are some common issues in the dataset that need to be addressed:
+- **Missing GPS Data**: Some cities in the road-segments.txt file may not have corresponding GPS data in city-gps.txt. In such cases, the program estimates the missing coordinates using weighted averages of neighboring cities' coordinates to maintain route-finding accuracy.
+- **Bidirectional Roads**: The road segments are bidirectional, meaning that travel from one city to another can be made in either direction with the same road properties (distance and speed limit).
+- **Data Integrity**: The code is designed to handle and bypass any errors or missing data in the files to ensure robustness in route finding. For instance, if a road segment has no corresponding city coordinates, the system continues by estimating the location based on neighboring cities, ensuring the algorithm can still find a path.
+
+---
+
 ## Key Features
 
 1. **Efficient Path Finding**:  
@@ -135,3 +167,4 @@ This project demonstrates my ability to design and implement efficient algorithm
 - **Data Handling**: Robust management of incomplete GPS data.  
 - **Performance Optimization**: Use of caching and efficient data structures.  
 - **Software Design**: Modular implementation with support for scalability.
+
